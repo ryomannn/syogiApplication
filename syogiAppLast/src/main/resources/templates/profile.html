@@ -94,12 +94,13 @@
           <a th:href="@{/profileUpdate}">プロフィール編集</a>
       </div>
     </div>
-    <form th:action="@{/upload}" method ="post" enctype="multipart/form-data" >
-    <input type="file" name ="upload" >
-    <input type = "submit">
-    </form>
+
 
   </div>
+     <form th:action="@{/upload}" method ="post" enctype="multipart/form-data" >
+    	<input type="file" name ="upload" >
+    	<input type = "submit">
+    </form>
   <!-- /#wrapper -->
 
   <!-- Bootstrap core JavaScript -->
