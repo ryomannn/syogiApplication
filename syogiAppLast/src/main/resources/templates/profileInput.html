@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<link rel="stylesheet" href="css/loginInput.css">
+</head>
+<body>
+
+ <h1>新規ユーザープロフィール登録画面</h1>
+<form id="profile-form" th:action="@{/profileInput}" method="post" >
+
+    <div class="form-group">
+        <label for="exampleInputPassword1">性別</label>
+        <input type="text" class="form-control" id="postContents" placeholder="性別" name="gender" >
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">趣味</label>
+        <input type="text" class="form-control" id="postContents" placeholder="趣味" name="hobby">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">段位、級位</label>
+        <input type="text" class="form-control" id="postContents" placeholder="段位、級位" name="grade" >
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">将棋歴</label>
+        <input type="text" class="form-control" id="postContents" placeholder="将棋歴" name="history" >
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">好きな戦型</label>
+        <input type="text" class="form-control" id="postContents" placeholder="好きな戦型" name="fav_battleType" >
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">コメント</label>
+        <input type="text" class="form-control" id="postContents" placeholder="コメント" name="comment" >
+    </div>
+    <button type="submit">登録</button>
+</form>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+</body>
+</html>

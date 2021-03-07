@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>SocketIOチャット</title>
+
+
+</head>
+<body>
+<section id = "name">
+    <form id="myName">
+        <p>名前を入力してください</p>
+        <input type="text" id="myName-input">
+        <button type="submit">決定</button>
+    </form>
+</section>
+<section id="room">
+    <form action="" id="create-room">
+    <p>作るroom名を入力してください</p>
+    <input type="text" id="create-input">
+    <button type="submit" >部屋を作る</button>
+    </form>
+
+    <form action="" id="join-form">
+        <p>入るroomを入力してください</p>
+        <input type="text" id="join-input">
+        <button type="submit">部屋に入る</button>
+    </form>
+    <button id = "remove">全削除</button>
+    <p>現在のroom一覧</p>
+    <ul id="roomList">
+    </ul>
+</section>
+<section id="chat">
+  <ul id ="roomName"></ul>
+    <form id="form-post">
+        <p>メッセージ入力</p>
+        <input type="text" id="msg">
+        <button type="submit" >送信</button>
+    </form>
+
+    <button id = "btn-leave">退室</button>
+
+    <!-- 発言ログ 右左追加 -->
+
+    <ul id="msg-list"></ul>
+ <script src="/socket.io/socket.io.js"></script>
+ <script >
+   const socket = io();
+
+socket.on("connect", () =>{
+        document.querySelector("#name").style.display = "block"
+        document.querySelector("#room").style.display = "none";
+        document.querySelector("#chat").style.display = "none";
+});
+
+//ユーザー情報登録する
+document.querySelector("#myName").addEventListener("submit",(e) =>{
+      e.preventDefault();
+
+      const user_name = document.querySelector("#myName-input");
+      if(user_name.value ){
+
+        socket.emit("create-user",{userName : user_name.value});
+
+
+        document.querySelector("#name").style.display = "none"
+        document.querySelector("#room").style.display = "block";
+        document.querySelector("#chat").style.display = "none";
+
+      }
+      else{
+        window.alert("文字を入力してください");
+      }
+});
+
+//room名をすべて表示
+socket.on("show-allRoom", (data)=>{
+
+    let listRoom = document.querySelector("#roomList");
+    let liRoom = document.createElement("li");
+    li.className ="child";
+    liRoom.innerHTML =  data.roomName;
+    listRoom.appendChild(liRoom);
+
+});
+
+//ルームを作る処理
+document.querySelector("#create-room").addEventListener("submit", (e)=>{
+  // 規定の送信処理をキャンセル(画面遷移しないなど)
+  e.preventDefault();
+
+  // 入力内容を取得する
+  const createRoomName = document.querySelector("#create-input");
+  if( createRoomName.value){
+    socket.emit("create-room",{roomName : createRoomName.value} );
+
+    createRoomName.value = "";
+  }
+  else{
+    windows.alert("文字を入力してください");
+  }
+});
+
+socket.on("go-chat", () => {
+  document.querySelector("#name").style.display = "none";
+  document.querySelector("#room").style.display = "none";
+  document.querySelector("#chat").style.display = "block";
+})
+
+socket.on("room-erorr",() => {
+  window.alert("このroomはすでに存在しています。違う名前にしてください");
+})
+
+//room内にroomName表示
+socket.on("return-roomName",(data) =>{
+
+  let name = document.querySelector("#roomName");
+  let liName = document.createElement("li");
+  liName.className = "Name";
+  liName.innerHTML = data.roomName;
+  name.appendChild(liName);
+});
+
+//ルーム一覧に追加表示
+socket.on("show-room",(data) => {
+
+  let showName = document.querySelector("#roomList")
+  let liShowName = document.createElement("div");
+  liShowName.className="child";
+  liShowName.innerHTML = data.roomName;
+  showName.appendChild(liShowName);
+});
+
+//roomに入る処理
+document.querySelector("#join-form").addEventListener("submit", (e) =>{
+  e.preventDefault();
+
+  const joinRoomName = document.querySelector("#join-input");
+  if(joinRoomName.value){
+
+    socket.emit("join-room",{roomName: joinRoomName.value});
+
+    joinRoomName.value = "";
+  }
+  else{
+    window.alert("文字を入力してください");
+  }
+});
+
+socket.on("roomName-erorr",() => {
+  window.alert("そのようなroomは存在しません。もう一度入力してください");
+})
+
+    // メッセージをサーバーに送信
+document.querySelector("#form-post").addEventListener("submit", (e)=>{
+
+  e.preventDefault();
+
+  // 入力内容を取得する
+  let message = document.querySelector("#msg");
+  if( message.value){
+  socket.emit("chat",{msg : message.value});
+
+  message.value = "";
+  }
+  else{
+    window.alert("文字を入力してください");
+  }
+
+});
+
+//メッセージのリスト表示
+socket.on("chat-List", (data)=>{
+
+const listChat = document.querySelector("#msg-list");
+const liChat = document.createElement("li");
+liChat.innerHTML = data.userName + ">" + data.msg;
+listChat.insertBefore(liChat, listChat.firstChild);
+
+});
+
+//タグを消す処理
+socket.on("remove",() => document.querySelector(".child").remove());
+socket.on("removeName", () => document.querySelector(".Name").remove());
+
+//退室処理
+document.querySelector("#btn-leave").addEventListener("click",(e) =>{
+
+  socket.emit("chat-leave");
+
+  document.querySelector("#name").style.display = "none"
+  document.querySelector("#room").style.display = "block";
+  document.querySelector("#chat").style.display = "none";
+
+});
+</script>
+
+</section>
+</body>
+</html>

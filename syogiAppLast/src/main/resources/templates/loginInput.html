@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<title>将棋アプリ</title>
+
+<!-- Bootstrap core CSS -->
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<link rel="stylesheet" href="css/loginInput.css">
+</head>
+<body>
+	<div>
+	   <h1>新規ユーザー登録画面</h1>
+	   <form class="form-container" th:action="@{/loginInput}" method="post" th:object="${user}" id="user-form">
+	       <div class="form-group" th:classappend="${#fields.hasErrors('userAddress')} ? 'has-error'">
+	        <label for="exampleInputEmail1">メールアドレス</label>
+	        <input type="text" class="form-control" id="postTitle"  placeholder="メールアドレス" th:field="*{userAddress}">
+	 		<span class="text-danger"
+	  	 		th:if="${#fields.hasErrors('userAddress')}"
+	    		th:errors="*{userAddress}"> userId error
+			</span>
+	       </div>
+	       <div class="form-group" th:classappend="${#fields.hasErrors('password')} ? 'has-error'">
+	      	 <label for="exampleInputPassword1">パスワード</label>
+	      	 <input type="text" class="form-control" id="postContents" placeholder="パスワード" th:field="*{password}">
+	 		<span class="text-danger"
+	  	 		th:if="${#fields.hasErrors('password')}"
+	    		th:errors="*{password}"> userId error
+			</span>
+	       </div>
+	       <div class="form-group" th:classappend="${#fields.hasErrors('userName')} ? 'has-error'">
+	     	 <label for="exampleInputPassword1">ユーザー名</label>
+	         <input type="text" class="form-control" id="postContents" placeholder="ユーザー名" th:field="*{userName}">
+	 		<span class="text-danger"
+	  	 		th:if="${#fields.hasErrors('userName')}"
+	    		th:errors="*{userName}"> userId error
+			</span>
+	       </div>
+	       <button type="submit">登録</button>
+	   </form>
+	</div>
+	<!-- Bootstrap core JavaScript -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+</body>
+</html>

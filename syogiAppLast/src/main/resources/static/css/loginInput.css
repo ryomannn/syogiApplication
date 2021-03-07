@@ -1,0 +1,18 @@
+@charset "UTF-8";
+
+#user-form{
+    width: 50%;
+    background: afff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px #000;
+}
+
+#profile-form{
+    width: 50%;
+    background: afff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px #000;
+
+}

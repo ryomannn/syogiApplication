@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>将棋アプリ</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+   <link href="css/simple-sidebar.css" rel="stylesheet">
+   <link href="css/table.css" rel="stylesheet" >
+
+</head>
+
+<body>
+
+  <div class="d-flex" id="wrapper">
+
+    <!-- Sidebar -->
+    <div class="bg-light border-right" id="sidebar-wrapper">
+      <div class="sidebar-heading">将棋アプリ </div>
+      <div class="list-group list-group-flush">
+        <a th:href="@{/profile}" class="list-group-item list-group-item-action bg-light">プロフィール</a>
+        <a th:href="@{/findUserList}" class="list-group-item list-group-item-action bg-light">友達一覧</a>
+        <a th:href="@{/findUser}" class="list-group-item list-group-item-action bg-light">ユーザー検索</a>
+        <a th:href="@{/postInput}" class="list-group-item list-group-item-action bg-light">新規投稿</a>
+        <a th:href="@{/post}" class="list-group-item list-group-item-action bg-light">投稿履歴</a>
+        <a th:href="@{/findBattleType}" class="list-group-item list-group-item-action bg-light">戦型選択</a>
+      </div>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+
+      <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+        <button class="btn btn-primary" id="menu-toggle">メニュー</button>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">お問い合わせ <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">ログアウト</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <div class="container-fluid">
+      	<h1>フレンドリスト</h1>
+		<table  class="kaisha">
+			<tr>
+				<th>ユーザーID</th>
+				<th>ユーザー名</th>
+				<th>プロフィール</th>
+			</tr>
+			<tr th:each = "user : ${userLists}" >
+				<td th:text="${user.userId}"></td>
+				<td th:text="${user.userName}"></td>
+				<td><a class="btn btn-primary" th:href="@{/friendProfile/{id}(id=${user.userId})}">プロフィール</a></td>
+			</tr>
+
+		</table>
+      </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+
+  </div>
+  <!-- /#wrapper -->
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="js/jquery/jquery.min.js"></script>
+  <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Menu Toggle Script -->
+  <script>
+    $("#menu-toggle").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+    });
+  </script>
+
+</body>
+
+</html>

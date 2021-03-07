@@ -1,0 +1,27 @@
+@charset "UTF-8";
+
+.bg{
+    background: url(../images/bg4.jpg) no-repeat;
+    height: 100vh;
+    background-size: 200%;
+}
+
+.contents{
+    display: flex;
+    justify-content: center;
+}
+
+.form-container{
+    width: 100%;
+    background: afff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px #000;
+}
+
+@media (max-width: 767px){
+    .bg{
+        background-size: 250%;
+    }
+
+}

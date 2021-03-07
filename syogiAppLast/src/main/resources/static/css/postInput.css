@@ -1,0 +1,12 @@
+@charset "UTF-8";
+
+.form-container{
+    width: 50%;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px #000;
+    padding: 30px;
+}
+
+#postContents{
+    height: 100px;
+}
